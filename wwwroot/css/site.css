@@ -1,31 +1,28 @@
-html {
-  font-size: 14px;
+.vertical-text{
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  margin: 0;
+  display: inline-block;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Stronger borders for the quadrants grid */
+.quadrants-frame {
+  border: 3px solid #212529;   /* dark + thick */
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.qb {                          /* quadrant border */
+  border: 2px solid #212529 !important;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.qb-bottom {                   /* divider between top and bottom rows */
+  border-bottom: 3px solid #212529 !important;
 }
 
-body {
-  margin-bottom: 60px;
+.qb-right {                    /* divider between left column and quadrants */
+  border-right: 3px solid #212529 !important;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.qb-mid {                      /* divider between Q1/Q2 and Q3/Q4 */
+  border-left: 3px solid #212529 !important;
 }
