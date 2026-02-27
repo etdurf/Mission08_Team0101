@@ -1,0 +1,216 @@
+@{
+    ViewData["Title"] = "Quadrants View";
+}
+@model List<ToDoTask>
+
+<div class="text-center">
+    <div class="container border rounded p-0">
+
+        <!-- TITLE -->
+        <div class="row g-0 border-bottom bg-light">
+            <div class="col-12 py-3">
+                <h1 class="display-4 m-0">Quadrants - Time Management Matrix</h1>
+            </div>
+        </div>
+
+        <!-- URGENT / NOT URGENT HEADER -->
+        <div class="row g-0 border-bottom">
+            <div class="col-1 border-end"></div>
+
+            <div class="col border-end py-2">
+                <h3 class="fw-bold m-0">Urgent</h3>
+            </div>
+
+            <div class="col py-2">
+                <h3 class="fw-bold m-0">Not Urgent</h3>
+            </div>
+        </div>
+
+        <!-- TOP ROW (Important) -->
+        <div class="row g-0 border-bottom">
+
+            <!-- Important Label -->
+            <div class="col-1 border-end d-flex align-items-center justify-content-center">
+                <h3 class="vertical-text fw-bold m-0">Important</h3>
+            </div>
+
+            <!------------------ QUADRANT 1 --------------------->
+            <div class="col border-end p-2">
+                <h5 class="fw-bold text-center">Quadrant 1</h5> <br>
+
+                @foreach (var task in Model)
+                {
+                    if (!task.Completed && task.Quadrant == 1)
+                    {
+                        <div class="d-flex align-items-center py-1 border-bottom">
+
+                            <a class="btn btn-success btn-sm me-2"
+                               asp-controller="Home"
+                               asp-action="Complete"
+                               asp-route-id="@task.TaskId">✓</a>
+
+                            <div class="flex-grow-1 me-3">
+                                @task.TaskName
+                            </div>
+
+                            <div class="me-3 text-nowrap" style="width:110px;">
+                                @task.DueDate?.ToString("MM/dd/yyyy")
+                            </div>
+
+                            <a class="btn btn-info btn-sm me-1"
+                               asp-controller="Home"
+                               asp-action="Edit"
+                               asp-route-id="@task.TaskId">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <a class="btn btn-danger btn-sm"
+                               asp-controller="Home"
+                               asp-action="Delete"
+                               asp-route-id="@task.TaskId">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                        </div>
+                    }
+                }
+            </div>
+
+            <!------------------ QUADRANT 2 --------------------->
+            <div class="col p-2">
+                <h5 class="fw-bold text-center">Quadrant 2</h5> <br>
+
+                @foreach (var task in Model)
+                {
+                    if (!task.Completed && task.Quadrant == 2)
+                    {
+                        <div class="d-flex align-items-center py-1 border-bottom">
+
+                            <a class="btn btn-success btn-sm me-2"
+                               asp-controller="Home"
+                               asp-action="Complete"
+                               asp-route-id="@task.TaskId">✓</a>
+
+                            <div class="flex-grow-1 me-3">
+                                @task.TaskName
+                            </div>
+
+                            <div class="me-3 text-nowrap" style="width:110px;">
+                                @task.DueDate?.ToString("MM/dd/yyyy")
+                            </div>
+
+                            <a class="btn btn-info btn-sm me-1"
+                               asp-controller="Home"
+                               asp-action="Edit"
+                               asp-route-id="@task.TaskId">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <a class="btn btn-danger btn-sm"
+                               asp-controller="Home"
+                               asp-action="Delete"
+                               asp-route-id="@task.TaskId">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <!-- BOTTOM ROW (Not Important) -->
+        <div class="row g-0">
+
+            <!-- Not Important Label -->
+            <div class="col-1 border-end d-flex align-items-center justify-content-center">
+                <h3 class="vertical-text fw-bold m-0">Not Important</h3>
+            </div>
+
+            <!------------------ QUADRANT 3 --------------------->
+            <div class="col border-end p-2">
+                <h5 class="fw-bold text-center">Quadrant 3</h5> <br>
+
+                @foreach (var task in Model)
+                {
+                    if (!task.Completed && task.Quadrant == 3)
+                    {
+                        <div class="d-flex align-items-center py-1 border-bottom">
+
+                            <a class="btn btn-success btn-sm me-2"
+                               asp-controller="Home"
+                               asp-action="Complete"
+                               asp-route-id="@task.TaskId">✓</a>
+
+                            <div class="flex-grow-1 me-3">
+                                @task.TaskName
+                            </div>
+
+                            <div class="me-3 text-nowrap" style="width:110px;">
+                                @task.DueDate?.ToString("MM/dd/yyyy")
+                            </div>
+
+                            <a class="btn btn-info btn-sm me-1"
+                               asp-controller="Home"
+                               asp-action="Edit"
+                               asp-route-id="@task.TaskId">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <a class="btn btn-danger btn-sm"
+                               asp-controller="Home"
+                               asp-action="Delete"
+                               asp-route-id="@task.TaskId">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                        </div>
+                    }
+                }
+            </div>
+
+            <!------------------ QUADRANT 4 --------------------->
+            <div class="col p-2">
+                <h5 class="fw-bold text-center">Quadrant 4</h5> <br>
+
+                @foreach (var task in Model)
+                {
+                    if (!task.Completed && task.Quadrant == 4)
+                    {
+                        <div class="d-flex align-items-center py-1 border-bottom">
+
+                            <a class="btn btn-success btn-sm me-2"
+                               asp-controller="Home"
+                               asp-action="Complete"
+                               asp-route-id="@task.TaskId">✓</a>
+
+                            <div class="flex-grow-1 me-3">
+                                @task.TaskName
+                            </div>
+
+                            <div class="me-3 text-nowrap" style="width:110px;">
+                                @task.DueDate?.ToString("MM/dd/yyyy")
+                            </div>
+
+                            <a class="btn btn-info btn-sm me-1"
+                               asp-controller="Home"
+                               asp-action="Edit"
+                               asp-route-id="@task.TaskId">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <a class="btn btn-danger btn-sm"
+                               asp-controller="Home"
+                               asp-action="Delete"
+                               asp-route-id="@task.TaskId">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
