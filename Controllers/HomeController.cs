@@ -1,7 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Mission08_Team0101.Data;
 using Mission08_Team0101.Models;
+using System.Linq;
 
 namespace Mission08_Team0101.Controllers
 {
@@ -14,9 +16,46 @@ namespace Mission08_Team0101.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index()
+        // ADD or EDIT (same view)
+        [HttpGet]
+        public IActionResult Index(int? id)
         {
-            return View();
+            ViewBag.Categories = new SelectList(_repo.GetAllCategories(), "CategoryId", "CategoryName");
+
+            // Create
+            if (id == null)
+            {
+                return View(new ToDoTask
+                {
+                    Completed = false
+                });
+            }
+
+            // Edit
+            var task = _repo.GetAllTasks().Single(x => x.TaskId == id);
+            return View(task);
+        }
+
+        // Handle both Create + Update
+        [HttpPost]
+        public IActionResult Index(ToDoTask task)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = new SelectList(_repo.GetAllCategories(), "CategoryId", "CategoryName");
+                return View(task);
+            }
+
+            if (task.TaskId == 0)
+            {
+                _repo.AddTask(task);     // Make sure your repo has AddTask
+            }
+            else
+            {
+                _repo.UpdateTask(task);
+            }
+
+            return RedirectToAction("Quadrants");
         }
 
         public IActionResult Quadrants()
@@ -39,20 +78,11 @@ namespace Mission08_Team0101.Controllers
         
         // ------------ EDIT TASK --------------
         [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            var taskToEdit = _repo.GetAllTasks()
-                .Single(x => x.TaskId == id);
-    
-            return View(taskToEdit); // EDIT when implemented
-        }
-        
+        public IActionResult Edit(int id) => RedirectToAction("Index", new { id });
+
         [HttpPost]
-        public IActionResult Edit(ToDoTask task)
-        {
-            _repo.UpdateTask(task);
-            return RedirectToAction("Quadrants");
-        }
+        public IActionResult Edit(ToDoTask task) => RedirectToAction("Index", task);
+        
         
         // ------------ DELETE TASK --------------
         [HttpGet]
